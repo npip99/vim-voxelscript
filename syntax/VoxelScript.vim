@@ -21,16 +21,21 @@ syntax region context_comments_1 start="\v\/\*" end="\*\/"
 
 syntax region string_stuff matchgroup=string_stuff_0 start="\v\"" end="\v\"" transparent contains=string_stuff_1
 syntax match string_stuff_1 "\v[^"]" keepend contained
-highlight link string_stuff_0 VSString
-highlight link string_stuff_1 VSString
 
 let pattern_11_str = 'syntax match pattern_11 "\v' . __IDENTIFIER . '"'
 exec pattern_11_str
-highlight link pattern_11 VSVariable
+
+
+let pattern_13_str = 'syntax match pattern_13 "\v' . __IDENTIFIER . '\s*(' . __IDENTIFIER . '\s*[\(])@="'
+exec pattern_13_str
+highlight link pattern_13 VSType
+
+let pattern_12_str = 'syntax match pattern_12 "\v' . __IDENTIFIER . '(\s*[\(])@="'
+exec pattern_12_str
+highlight link pattern_12 VSFunc
 
 let pattern_10_str = 'syntax match pattern_10 "\v' . __KEYWORDS . '"'
 exec pattern_10_str
-highlight link pattern_10 VSKeyword
 
 " // Color "CUSTOM_TYPE VARIABLE" accordingly
 " pattern_9
@@ -39,9 +44,6 @@ exec pattern_9_str
 exec 'syntax match pattern_9_1_2 "\v\s*' . __NONCAPTURE_TYPE . '" contained'
 exec 'syntax match pattern_9_1_1 "\v\s*' . __KEYWORDS . '" contained'
 exec 'syntax match pattern_9_0 "\v\s*' . __IDENTIFIER . '(\s*\=)@=" contained'
-highlight link pattern_9_0 VSVariable
-highlight link pattern_9_1_1 VSKeyword
-highlight link pattern_9_1_2 VSType
 
 " // Color all "is (not)? TYPE;"
 " pattern_8
@@ -66,8 +68,6 @@ syntax match pattern_4_0_3 '\v(\s*\=)' contained
 exec 'syntax match pattern_4_0_2 "\v' . __IDENTIFIER . '" contained nextgroup=pattern_4_0_3'
 syntax match pattern_4_0_1 "\v((<|>)typedef\s+)" contained nextgroup=pattern_4_0_2
 
-highlight link pattern_411 White
-
 syntax region pattern_3 start="\v(implement|class|trait)@=" end="\v\{" transparent contains=pattern_3_1,pattern_3_2,pattern_3_3,pattern_3_4_1,pattern_3_4_2,pattern_3_5
 syntax match pattern_3_5 "\v[^\{]" contained keepend
 syntax match pattern_3_4_2 "\v\/\/.*" contained keepend
@@ -82,7 +82,6 @@ exec 'syntax match pattern_1 "\v(\s*)' . __CONTROL_FLOW . '"'
 
 highlight link pattern_1 VSSpecial
 highlight link pattern_2 White
-highlight link pattern_3 String
 highlight link pattern_3_1 White
 highlight link pattern_3_2 VSKeyword
 highlight link pattern_3_3 VSType
@@ -96,6 +95,13 @@ highlight link pattern_4_1_1 VSKeyword
 highlight link pattern_4_1_2 VSType
 highlight link pattern_5_1 VSKeyword
 highlight link pattern_5_2 VSType
+highlight link pattern_9_0 VSVariable
+highlight link pattern_9_1_1 VSKeyword
+highlight link pattern_9_1_2 VSType
+highlight link pattern_10 VSKeyword
+highlight link pattern_11 VSVariable
+highlight link string_stuff_0 VSString
+highlight link string_stuff_1 VSString
 highlight link context_comments_2 VSComment
 highlight link context_comments_1 VSComment
 
@@ -105,3 +111,4 @@ highlight VSKeyword ctermfg=74 guifg=#569CD6
 highlight VSType ctermfg=79 guifg=#4EC9B0
 highlight VSVariable ctermfg=153 guifg=#9CDCFE
 highlight VSString ctermfg=174 guifg=#CE9178
+highlight VSFunc ctermfg=187 guifg=#DCDCAA
