@@ -2,9 +2,10 @@ if exists("b:current_syntax")
     finish
 endif
 
-echom "Our syntax highlighting code will go here."
-
 let b:current_syntax = "VoxelScript"
+
+" Redraw the syntax highlighting from the start
+syntax sync fromstart
 
 " @= for positive look-ahead, @<= for positive look-behind, @! for negative look-ahead
 " (?!X) => (X)@!
